@@ -50,7 +50,7 @@ CATEGORY = "Subgraph Functions"
 FUNCTIONS_SUBDIR = "functions"
 
 # ウィジェットで値を入れる型。それ以外はリンクで受ける
-# (make_workflow_json.WIDGET_TYPES と同じ判定)
+# (ComfyUI 本体が COMBO / primitives をウィジェットとして扱うのに合わせる)
 WIDGET_TYPES = {"INT", "FLOAT", "STRING", "BOOLEAN", "COMBO"}
 
 # グラフには載るが実行されないノード
@@ -347,8 +347,9 @@ def _make_class(name, path):
 
         @classmethod
         def INPUT_TYPES(cls):
-            # /object_info のたびに呼ばれるので、入力を足したらブラウザ再読込で追う。
-            # 出力を変えた場合は RETURN_TYPES がクラス属性なので reload が要る
+            # /object_info のたびに呼ばれる。出力 (RETURN_TYPES) はクラス属性
+            # なのでここでは変えられないが、middleware 側がファイルの変化を見て
+            # クラスごと作り直すため、入出力どちらもブラウザ再読込で追随する
             try:
                 w, s = load_blueprint(cls.BLUEPRINT_PATH)
                 spec, _, _, _ = declare(w, s)
