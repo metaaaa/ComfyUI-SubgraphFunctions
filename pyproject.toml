@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-subgraphfunctions"
+description = "Use a saved subgraph as a shared function: edit it once, every workflow that calls it changes."
+version = "0.1.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/metaaaa/ComfyUI-SubgraphFunctions"
+
+[tool.comfy]
+PublisherId = "metaaaa"
+DisplayName = "Subgraph Functions"
+Icon = ""
